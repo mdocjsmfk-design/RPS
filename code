@@ -1,0 +1,54 @@
+int led1 = 2;
+int led2 = 3;
+int led3 = 4;
+
+int btn1 = 5;
+int btn2 = 6;
+int btn3 = 7;
+
+void setup() {
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+
+  pinMode(btn1, INPUT_PULLUP);
+  pinMode(btn2, INPUT_PULLUP);
+  pinMode(btn3, INPUT_PULLUP);
+
+  randomSeed(analogRead(0));
+}
+
+void loop() {
+
+  // wait until ANY button is pressed
+  while (digitalRead(btn1) == HIGH &&
+         digitalRead(btn2) == HIGH &&
+         digitalRead(btn3) == HIGH) {
+    // do nothing (waiting)
+  }
+
+  // turn off all LEDs first
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+
+  // pick random LED
+  int choice = random(1, 4);
+
+  if (choice == 1) {
+    digitalWrite(led1, HIGH);
+  } else if (choice == 2) {
+    digitalWrite(led2, HIGH);
+  } else {
+    digitalWrite(led3, HIGH);
+  }
+
+  delay(1000); // keep LED on for a second
+
+  // turn LEDs off again
+  digitalWrite(led1, LOW);
+  digitalWrite(led2, LOW);
+  digitalWrite(led3, LOW);
+
+  delay(300); // small delay so it doesn't instantly retrigger
+}
